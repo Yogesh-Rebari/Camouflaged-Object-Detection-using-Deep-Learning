@@ -1,0 +1,492 @@
+/* ==========================================================================
+   Global Stylesheet (static/css/style.css)
+   - Defines color system, typography, layout utilities
+   - Styles global header/nav, hero, team cards, contact/feedback, and footer
+   - Implements responsive behavior using CSS Grid/Flexbox and media queries
+   ========================================================================== */
+/* Base Styles */
+:root {
+    --color-bg: #0f172a;
+    --color-surface: #111827;
+    --color-card: #1f2937;
+    --color-primary: #2563eb;
+    --color-secondary: #38bdf8;
+    --color-accent: #f97316;
+    --color-text: #f8fafc;
+    --color-muted: #94a3b8;
+    --color-border: rgba(148, 163, 184, 0.2);
+    --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --shadow-elevated: 0 20px 40px rgba(15, 23, 42, 0.35);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+}
+
+/* Header & Navigation */
+/* Fixed header with blur and border for separation from content */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 0;
+}
+
+.logo a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-secondary);
+}
+
+/* COD logo styles */
+.cod-logo {
+    width: 130px;
+    height: 36px;
+    display: block;
+    transform-origin: center;
+    will-change: transform;
+    animation: logo-bob 4s ease-in-out infinite;
+}
+
+.cod-text {
+    filter: drop-shadow(0 6px 10px rgba(3, 7, 18, 0.45));
+}
+
+.cod-gloss {
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+}
+
+@keyframes logo-bob {
+    0% { transform: translateY(0) scale(1); }
+    25% { transform: translateY(-2px) scale(1.01); }
+    50% { transform: translateY(0) scale(1); }
+    75% { transform: translateY(-1px) scale(1.005); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+/* Slightly increase logo visibility on small screens */
+@media (max-width: 540px) {
+    .cod-logo {
+        width: 100px;
+        height: 28px;
+    }
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile nav toggle (hamburger) - hidden on larger screens */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    background: var(--color-text);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Primary nav links - become a vertical dropdown on small screens */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    font-weight: 500;
+    padding: 0.35rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.4rem;
+    width: 100%;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links .active::after {
+    transform: scaleX(1);
+}
+
+/* Offset main content for fixed header height */
+main {
+    padding-top: 5.5rem;
+}
+
+/* Hero Section: large intro with CTA buttons */
+.hero {
+    padding: 5rem 0 4rem;
+    background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.25), transparent),
+                linear-gradient(160deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.6));
+}
+
+.hero-content {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.hero-text h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.hero-text p {
+    color: var(--color-muted);
+    max-width: 60ch;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+}
+
+.cta-button.primary {
+    background: var(--color-primary);
+    color: white;
+}
+
+.cta-button.secondary {
+    background: var(--color-secondary);
+    color: #0f172a;
+}
+
+.cta-button.accent {
+    background: var(--color-accent);
+    color: #0f172a;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 30px rgba(37, 99, 235, 0.3);
+}
+
+/* Team Section */
+/* Team Section: grid of member cards */
+.team {
+    padding: 4rem 0;
+}
+
+.team h2 {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+}
+
+.section-intro {
+    color: var(--color-muted);
+    max-width: 60ch;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.team-card {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-elevated);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Avatar styling for team/guidance cards */
+.avatar-placeholder,
+.avatar-photo {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(56, 189, 248, 0.35);
+}
+
+.avatar-placeholder {
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    background: rgba(59, 130, 246, 0.25);
+    color: var(--color-secondary);
+}
+
+.role {
+    color: var(--color-secondary);
+    font-weight: 600;
+    margin: 0;
+}
+
+.bio {
+    color: var(--color-muted);
+    margin: 0;
+}
+
+/* Contact & Feedback: two-column layout on larger viewports */
+.contact {
+    padding: 4rem 0 3rem;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 1), rgba(17, 24, 39, 0.8));
+}
+
+.contact-grid {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: start;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.contact-info a {
+    color: var(--color-secondary);
+}
+
+.feedback-form-wrapper {
+    background: var(--color-card);
+    border-radius: 1rem;
+    padding: 2rem;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-elevated);
+}
+
+.feedback-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.feedback-form label {
+    font-weight: 600;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    padding: 0.85rem 0.9rem;
+    border-radius: 0.6rem;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: rgba(15, 23, 42, 0.6);
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+.feedback-form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.submit-button {
+    padding: 0.85rem 1.4rem;
+    border-radius: 0.6rem;
+    background: linear-gradient(120deg, var(--color-primary), var(--color-secondary));
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+}
+
+.form-status {
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    min-height: 1rem;
+}
+
+/* Footer */
+/* Footer */
+.site-footer {
+    border-top: 1px solid var(--color-border);
+    background: rgba(15, 23, 42, 0.95);
+    padding: 1.8rem 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.social-links a {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    font-size: 0.85rem;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--color-secondary);
+    color: #0f172a;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+    .hero-content {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        padding: 1rem 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 1rem;
+        background: rgba(15, 23, 42, 0.98);
+        border: 1px solid var(--color-border);
+        border-radius: 0.9rem;
+        flex-direction: column;
+        gap: 0;
+        width: min(240px, 80vw);
+        padding: 0.5rem;
+        box-shadow: var(--shadow-elevated);
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-links.open {
+        transform: scaleY(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 0.75rem 1rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 540px) {
+    .hero-text h1 {
+        font-size: clamp(2rem, 8vw, 2.5rem);
+    }
+
+    .contact-grid {
+        gap: 2rem;
+    }
+}
+

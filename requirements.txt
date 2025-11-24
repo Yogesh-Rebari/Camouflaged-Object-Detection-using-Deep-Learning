@@ -1,0 +1,6 @@
+Flask==2.3.4
+ultralytics==8.1.45
+# ultralytics will pull torch automatically; if you need a CPU-only torch, install torch with the appropriate wheel for Windows
+opencv-python==4.8.0.76
+Pillow==10.3.0
+numpy==1.26.4

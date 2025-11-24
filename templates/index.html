@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block title %}YOLOv8 Object Detection | Project Overview{% endblock %}
+
+{# Page 1: Index - About, Team, Contact, Feedback #}
+{% block content %}
+        <!-- About Project: hero banner with summary and primary actions -->
+        <section class="hero" id="about-project">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>Camouflaged Object Detection using Deep Learning.</h1>
+                    <p>
+                        This project presents a robust deployment of YOLOv8 tailored for detecting camouflaged or low-contrast objects in complex backgrounds.
+                        It demonstrates a scalable inference pipeline designed for both web and edge, with a focus on clarity, speed, and reliability.
+                    </p>
+                    <p>
+                        Our objective is to deliver precise detections in challenging environments through thoughtful dataset preparation, model choice, and iterative evaluation.
+                    </p>
+                </div>
+                <div class="hero-actions">
+                    <a class="cta-button primary" href="{{ url_for('model_info') }}">Explore Model Details</a>
+                    <a class="cta-button secondary" href="{{ url_for('predict') }}">Run Detection Now</a>
+                    <a class="cta-button accent" href="{{ url_for('performance') }}">View Evaluation Metrics</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Members: responsive card grid with actual photos -->
+        <section class="team" id="team">
+            <div class="container">
+                <h2>Meet the Team</h2>
+                <p class="section-intro">
+                    We are a multidisciplinary team focused on applied computer vision, model optimization, and intuitive user experiences.
+                </p>
+                <div class="team-grid">
+                    <article class="team-card">
+                        <img src="{{ url_for('static', filename='images/Osama.png') }}" alt="Portrait of Osama Mikrani" class="avatar-photo">
+                        <h3>Osama Mikrani</h3>
+                        <p class="role">Full Stack Developer</p>
+                        <p class="bio">
+                            Develops deployment tooling, streamlines the inference service, and enhances the UI for insight-driven workflows.
+                        </p>
+                    </article>
+                    <article class="team-card">
+                        <img src="{{ url_for('static', filename='images/Pavan.png') }}" alt="Portrait of Pavan U" class="avatar-photo">
+                        <h3>Pavan U</h3>
+                        <p class="role">Computer Vision Engineer</p>
+                        <p class="bio">
+                            Designs augmentation strategies, conducts ablation studies, and contributes to data-engineering improvements for model reliability.
+                        </p>
+                    </article>
+                    <article class="team-card">
+                        <img src="{{ url_for('static', filename='images/Raghu.png') }}" alt="Portrait of Raghu G.R" class="avatar-photo">
+                        <h3>Raghu G R</h3>
+                        <p class="role">Data Scientist</p>
+                        <p class="bio">
+                            Leads dataset analysis, labeling quality checks, and model evaluation with clear, actionable metrics.
+                        </p>
+                    </article>
+                    <article class="team-card">
+                        <img src="{{ url_for('static', filename='images/Yogesh.png') }}" alt="Portrait of Yogesh Rebari" class="avatar-photo">
+                        <h3>Yogesh Rebari</h3>
+                        <p class="role">Software Engineer</p>
+                        <p class="bio">
+                            Develops deployment tooling, streamlines the inference service, and enhances the UI for insight-driven workflows.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Guidance: brief profiles for academic/industry guides -->
+        <section class="team" id="guidance">
+            <div class="container">
+                <h2>Project Guidance</h2>
+                <p class="section-intro">
+                    We acknowledge the guidance and expert supervision that shaped this project’s direction and outcomes.
+                </p>
+                <div class="team-grid">
+                    <article class="team-card">
+                        <img src="{{ url_for('static', filename='images/Shantala.png') }}" alt="Portrait of Dr. Shantala C P" width="128" height="128" class="avatar-photo">
+                        <h3>Dr. Shantala C P</h3>
+                        <p class="role">Prof & Head, Dept. of CSE</p>
+                        <p class="bio">
+                            Provided expert supervision on model selection and data management strategies.
+                        </p>
+                    </article>
+                    <article class="team-card">
+                        <img src="{{ url_for('static', filename='images/Rashmi.png') }}" alt="Portrait of Mrs. Rashmi C R" width="128" height="128" class="avatar-photo">
+                        <h3>Mrs. Rashmi C R</h3>
+                        <p class="role">Professor, Dept. of CSE</p>
+                        <p class="bio">
+                            Advised on experiment design, baseline comparisons, and interpretation of evaluation metrics.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Feedback: details and simple validated form -->
+        <section class="contact" id="contact">
+            <div class="container contact-grid">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <p>We would love to hear from you regarding collaborations, feedback, or deployment opportunities.</p>
+                    <ul>
+                        <li><strong>Email:</strong> <a href="mailto:codteam@gmail.com">codyolov8@gmail.com</a></li>
+                        <li><strong>Phone:</strong> <a href="tel:+911234567890">+91 12345-67890</a></li>
+                        <li><strong>GitHub:</strong> <a href="https://github.com/example" target="_blank" rel="noopener">github.com</a></li>
+                        <li><strong>Location:</strong> CIT College Tumkur </li>
+                    </ul>
+                </div>
+
+                <div class="feedback-form-wrapper">
+                    <h2>Feedback &amp; Suggestions</h2>
+                    <form class="feedback-form" id="feedbackForm" novalidate>
+                        <label for="name">Name (optional)</label>
+                        <input type="text" id="name" name="name" placeholder="Jane Doe">
+
+                        <label for="email">Email (optional)</label>
+                        <input type="email" id="email" name="email" placeholder="jane@example.com">
+
+                        <label for="feedback">Your Feedback</label>
+                        <textarea id="feedback" name="feedback" placeholder="Share your thoughts..." required></textarea>
+
+                        <button type="submit" class="submit-button">Submit Feedback</button>
+                        <p class="form-status" id="formStatus" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+{% endblock %}
+

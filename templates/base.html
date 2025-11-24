@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {# 
+        Base Layout (templates/base.html)
+        - Provides shared head, global styles, fixed header navigation, and footer
+        - Child templates should override 'title' and fill 'content' block
+        - Optional 'extra_css' and 'extra_js' blocks for page-specific assets
+    #}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}YOLOv8 Object Detection{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Global, fixed site header with responsive navigation -->
+    <header class="site-header" role="banner">
+        <div class="container header-content">
+            <!-- Project title / logo -->
+            <div class="logo">
+                <a href="{{ url_for('index') }}" aria-label="COD Home">
+                    <!-- Animated SVG COD logo with shimmering gradient -->
+                    <svg class="cod-logo" width="130" height="36" viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="false">
+                        <title>COD</title>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" x2="100%" y1="0%" y2="0%">
+                                <stop offset="0%" stop-color="#60A5FA" />
+                                <stop offset="50%" stop-color="#38BDF8" />
+                                <stop offset="100%" stop-color="#A78BFA" />
+                                <!-- animate the gradient to create a shimmer -->
+                                <animateTransform attributeName="gradientTransform" type="translate" from="-1 0" to="1 0" dur="3s" repeatCount="indefinite" />
+                            </linearGradient>
+                        </defs>
+
+                        <text class="cod-text" x="4" y="26" fill="url(#logoGrad)" font-family="Segoe UI, Roboto, Arial, sans-serif" font-weight="700" font-size="24">COD</text>
+                        <!-- subtle glossy overlay using a semi-transparent white for depth -->
+                        <text class="cod-gloss" x="4" y="26" fill="rgba(255,255,255,0.08)" font-family="Segoe UI, Roboto, Arial, sans-serif" font-weight="700" font-size="24">COD</text>
+                    </svg>
+                </a>
+            </div>
+            <!-- Primary navigation (collapses on mobile) -->
+            <nav class="nav" role="navigation" aria-label="Primary">
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('index') }}">Project Home</a></li>
+                    <li><a href="{{ url_for('model_info') }}">Model &amp; Data</a></li>
+                    <li><a href="{{ url_for('predict') }}">Live Prediction</a></li>
+                    <li><a href="{{ url_for('performance') }}">Performance</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page main content injected by child templates -->
+    <main role="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Global footer with social links -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-content">
+            <p>&copy; {{ current_year or 2025 }} YOLOv8 Deployment Team. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">in</a>
+                <a href="#" aria-label="Twitter">tw</a>
+                <a href="#" aria-label="YouTube">yt</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global scripts and page-specific scripts -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}YOLOv8 | Live Prediction (Placeholder){% endblock %}
+{% block content %}
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Live Prediction</h1>
+                <p>Upload an image to run YOLOv8 object detection. The server will return an annotated image with detections.</p>
+            </div>
+            <div class="hero-actions">
+                <a class="cta-button primary" href="{{ url_for('model_info') }}">Explore Model Details</a>
+                <a class="cta-button accent" href="{{ url_for('performance') }}">View Evaluation Metrics</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container upload-section">
+        <h2>Image Upload</h2>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for msg in messages %}
+                    <li>{{ msg }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form method="post" action="{{ url_for('predict') }}" enctype="multipart/form-data">
+            <label for="image">Choose an image (jpg/png):</label>
+            <input type="file" id="image" name="image" accept="image/*" required />
+            <button type="submit" class="cta-button primary">Detect</button>
+        </form>
+
+        {% if uploaded_image or annotated_image %}
+        <div class="results">
+            <h3>Results</h3>
+            <div class="result-pair">
+                {% if uploaded_image %}
+                <div>
+                    <p>Original</p>
+                    <img src="{{ url_for('static', filename='uploads/' ~ uploaded_image) }}" alt="uploaded" style="max-width:400px;" />
+                </div>
+                {% endif %}
+
+                {% if annotated_image %}
+                <div>
+                    <p>Annotated</p>
+                    <img src="{{ url_for('static', filename='uploads/' ~ annotated_image) }}" alt="annotated" style="max-width:400px;" />
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </section>
+{% endblock %}
+

@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% block title %}YOLOv8 | Performance &amp; Metrics{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/model_style.css') }}">
+{% endblock %}
+
+{% block content %}
+    <main class="model-page">
+        <section class="page-hero">
+            <div class="container">
+                <h1>Model Performance &amp; Evaluation Metrics</h1>
+                <p>
+                    Comprehensive performance metrics and evaluation results for the Camouflaged Military Soldier Detection model.
+                </p>
+            </div>
+        </section>
+
+        <!-- Key Performance Metrics -->
+        <section class="model-architecture" id="metrics">
+            <div class="container">
+                <h2>Key Performance Metrics</h2>
+                <p>
+                    The model was evaluated on a validation set after training for 100 epochs. The following metrics
+                    demonstrate the model's effectiveness in detecting camouflaged military soldiers across various scenarios.
+                </p>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <caption>Validation Set Performance Metrics</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Metric</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Value Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>mAP@0.5</strong></td>
+                                <td>Mean Average Precision at IoU threshold 0.5</td>
+                                <td>Evaluated on validation set</td>
+                            </tr>
+                            <tr>
+                                <td><strong>mAP@0.5:0.95</strong></td>
+                                <td>Mean Average Precision across IoU thresholds 0.5 to 0.95</td>
+                                <td>Evaluated on validation set</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Precision</strong></td>
+                                <td>Ratio of true positive detections to all positive predictions</td>
+                                <td>Evaluated on validation set</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Recall</strong></td>
+                                <td>Ratio of true positive detections to all actual positives</td>
+                                <td>Evaluated on validation set</td>
+                            </tr>
+                            <tr>
+                                <td><strong>F1-Score</strong></td>
+                                <td>Harmonic mean of Precision and Recall</td>
+                                <td>Calculated from Precision and Recall</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Metrics -->
+        <section class="dataset" id="training">
+            <div class="container">
+                <h2>Training Metrics</h2>
+                <p>
+                    The model was trained with careful monitoring of loss functions across 100 epochs. Early stopping
+                    with a patience of 50 epochs was implemented to prevent overfitting and ensure optimal generalization.
+                </p>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <caption>Training Configuration & Loss Metrics</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Metric Type</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Box Loss</strong></td>
+                                <td>Bounding box regression loss (train/validation)</td>
+                                <td>Monitored and optimized</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Classification Loss</strong></td>
+                                <td>Object classification loss (train/validation)</td>
+                                <td>Monitored and optimized</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DFL Loss</strong></td>
+                                <td>Distribution Focal Loss for bounding box refinement</td>
+                                <td>Monitored and optimized</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Learning Curves</strong></td>
+                                <td>Training and validation loss convergence</td>
+                                <td>Analyzed for optimal stopping</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Confusion Matrix</strong></td>
+                                <td>Normalized confusion matrix for class predictions</td>
+                                <td>Generated for validation set</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Model Capabilities -->
+        <section class="model-architecture" id="capabilities">
+            <div class="container">
+                <h2>Model Capabilities</h2>
+                <p>
+                    The fine-tuned YOLOv8n model demonstrates strong performance in detecting camouflaged military
+                    soldiers with the following capabilities:
+                </p>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <caption>Detection Capabilities</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Feature</th>
+                                <th scope="col">Capability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Real-time Detection</strong></td>
+                                <td>Fast inference suitable for real-time applications</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Camouflage Handling</strong></td>
+                                <td>Specialized for detecting soldiers in camouflage patterns</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Density Estimation</strong></td>
+                                <td>Counts and estimates soldier density in images</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Confidence Thresholding</strong></td>
+                                <td>Configurable confidence threshold (default: 0.5)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bounding Box Localization</strong></td>
+                                <td>Precise bounding box coordinates for each detection</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Image Resolution</strong></td>
+                                <td>Optimized for 640x640 pixel input images</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluation Notes -->
+        <section class="dataset" id="evaluation">
+            <div class="container">
+                <h2>Evaluation Methodology</h2>
+                <p>
+                    The model performance was evaluated using standard object detection metrics on a held-out validation set.
+                    The evaluation process includes:
+                </p>
+                <ul style="color: var(--color-text); line-height: 1.8; margin: 1.5rem 0;">
+                    <li><strong>Validation Set Testing:</strong> Model evaluated on separate validation images not seen during training</li>
+                    <li><strong>Confusion Matrix Analysis:</strong> Normalized confusion matrix generated to understand classification performance</li>
+                    <li><strong>Learning Curve Analysis:</strong> Training and validation losses monitored to ensure proper convergence</li>
+                    <li><strong>Best Model Selection:</strong> Model checkpoint with best validation performance selected for deployment</li>
+                    <li><strong>Visual Validation:</strong> Sample validation images with predictions visualized for qualitative assessment</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="container" style="margin: 3rem 0; text-align: center;">
+            <div class="hero-actions">
+                <a class="cta-button primary" href="{{ url_for('predict') }}">Test Model Now</a>
+                <a class="cta-button secondary" href="{{ url_for('model_info') }}">View Model Details</a>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+

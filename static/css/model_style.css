@@ -1,0 +1,119 @@
+/* ==========================================================================
+   Model Page Stylesheet (static/css/model_style.css)
+   - Adds presentation rules for documentation tables on model.html
+   - Focuses on readability: alternating rows, clear borders, captions
+   ========================================================================== */
+:root {
+    --table-header-bg: rgba(37, 99, 235, 0.2);
+    --table-row-even: rgba(15, 23, 42, 0.65);
+    --table-row-odd: rgba(17, 24, 39, 0.85);
+    --table-border: rgba(148, 163, 184, 0.25);
+}
+
+.model-page {
+    padding-top: 6rem;
+}
+
+/* Page introduction area */
+.page-hero {
+    padding: 4.5rem 0 3rem;
+    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.25), transparent);
+}
+
+.page-hero h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3rem);
+    margin-bottom: 1rem;
+}
+
+.page-hero p {
+    color: var(--color-muted);
+    max-width: 70ch;
+}
+
+.model-architecture,
+.dataset {
+    padding: 3.5rem 0;
+}
+
+.model-architecture p,
+.dataset p {
+    color: var(--color-muted);
+    max-width: 75ch;
+}
+
+/* Allow tables to scroll horizontally on small screens */
+.table-wrapper {
+    margin-top: 2.5rem;
+    overflow-x: auto;
+}
+
+/* Base table styling with soft shadows and subtle borders */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(15, 23, 42, 0.7);
+    border-radius: 1rem;
+    border: 1px solid var(--table-border);
+    overflow: hidden;
+    min-width: 320px;
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.4);
+}
+
+.data-table caption {
+    caption-side: top;
+    text-align: left;
+    padding: 1.2rem 1.5rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+    letter-spacing: 0.05em;
+}
+
+/* Emphasized header row */
+.data-table thead {
+    background: var(--table-header-bg);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-size: 0.85rem;
+}
+
+.data-table th,
+.data-table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--table-border);
+}
+
+/* Alternating row colors for readability */
+.data-table tbody tr:nth-child(even) {
+    background: var(--table-row-even);
+}
+
+.data-table tbody tr:nth-child(odd) {
+    background: var(--table-row-odd);
+}
+
+.data-table tbody tr:hover {
+    background: rgba(37, 99, 235, 0.25);
+}
+
+.data-table td:first-child {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.data-table td:nth-child(2),
+.data-table td:nth-child(3) {
+    color: var(--color-muted);
+}
+
+@media (max-width: 640px) {
+    .data-table th,
+    .data-table td {
+        padding: 0.85rem 1rem;
+    }
+
+    .data-table caption {
+        padding: 1rem;
+    }
+}
+
