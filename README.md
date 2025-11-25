@@ -8,8 +8,6 @@ A simple Flask web app that integrates YOLOv8 (Ultralytics) for image object det
 
 ## Demo Images
 
-Left: cod01 • Center: cod02 • Right: cod03
-
 ![cod02](static/images/cod02.png)
 ![cod03](static/images/cod03.png)
 
