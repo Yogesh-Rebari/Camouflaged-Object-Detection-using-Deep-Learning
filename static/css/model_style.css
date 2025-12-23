@@ -1,99 +1,149 @@
 /* ==========================================================================
-   Model Page Stylesheet (static/css/model_style.css)
-   - Adds presentation rules for documentation tables on model.html
-   - Focuses on readability: alternating rows, clear borders, captions
+   Model & Performance Page Stylesheet
+   - Modern LandingLens-inspired design
+   - Light theme with clean tables and image sections
    ========================================================================== */
-:root {
-    --table-header-bg: rgba(37, 99, 235, 0.2);
-    --table-row-even: rgba(15, 23, 42, 0.65);
-    --table-row-odd: rgba(17, 24, 39, 0.85);
-    --table-border: rgba(148, 163, 184, 0.25);
-}
 
 .model-page {
-    padding-top: 6rem;
+    padding-top: 0;
 }
 
-/* Page introduction area */
+/* Page Hero Section */
 .page-hero {
-    padding: 4.5rem 0 3rem;
-    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.25), transparent);
+    padding: var(--spacing-md) 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    text-align: center;
 }
 
 .page-hero h1 {
-    font-size: clamp(2.2rem, 4.5vw, 3rem);
-    margin-bottom: 1rem;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 800;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text);
+    letter-spacing: -0.02em;
 }
 
 .page-hero p {
-    color: var(--color-muted);
+    color: var(--color-text-light);
+    font-size: 0.9rem;
     max-width: 70ch;
+    margin: 0 auto;
+    line-height: 1.5;
 }
 
+/* Image Section */
+.model-image-section {
+    padding: var(--spacing-md) 0;
+    background: var(--color-surface);
+}
+
+.model-image-container {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: var(--color-card);
+}
+
+.model-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Content Sections */
 .model-architecture,
 .dataset {
-    padding: 3.5rem 0;
+    padding: var(--spacing-md) 0;
+}
+
+.model-architecture {
+    background: var(--color-bg);
+}
+
+.dataset {
+    background: var(--color-surface);
+}
+
+.model-architecture h2,
+.dataset h2 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text);
+    letter-spacing: -0.01em;
 }
 
 .model-architecture p,
 .dataset p {
-    color: var(--color-muted);
+    color: var(--color-text-light);
+    font-size: 0.9rem;
     max-width: 75ch;
+    line-height: 1.5;
+    margin-bottom: var(--spacing-md);
 }
 
-/* Allow tables to scroll horizontally on small screens */
+/* Table Wrapper */
 .table-wrapper {
-    margin-top: 2.5rem;
+    margin-top: var(--spacing-md);
     overflow-x: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
 }
 
-/* Base table styling with soft shadows and subtle borders */
+/* Modern Table Styling */
 .data-table {
     width: 100%;
     border-collapse: collapse;
-    background: rgba(15, 23, 42, 0.7);
-    border-radius: 1rem;
-    border: 1px solid var(--table-border);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     min-width: 320px;
-    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.4);
 }
 
 .data-table caption {
     caption-side: top;
     text-align: left;
-    padding: 1.2rem 1.5rem;
-    font-weight: 600;
-    color: var(--color-secondary);
-    letter-spacing: 0.05em;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
 }
 
-/* Emphasized header row */
 .data-table thead {
-    background: var(--table-header-bg);
+    background: var(--color-surface);
     text-transform: uppercase;
-    letter-spacing: 0.07em;
-    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 .data-table th,
 .data-table td {
-    padding: 1rem 1.5rem;
+    padding: var(--spacing-sm) var(--spacing-md);
     text-align: left;
-    border-bottom: 1px solid var(--table-border);
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.9rem;
 }
 
-/* Alternating row colors for readability */
+.data-table th {
+    color: var(--color-text);
+}
+
+.data-table tbody tr {
+    transition: background 0.2s ease;
+}
+
 .data-table tbody tr:nth-child(even) {
-    background: var(--table-row-even);
-}
-
-.data-table tbody tr:nth-child(odd) {
-    background: var(--table-row-odd);
+    background: var(--color-surface);
 }
 
 .data-table tbody tr:hover {
-    background: rgba(37, 99, 235, 0.25);
+    background: rgba(0, 102, 255, 0.05);
 }
 
 .data-table td:first-child {
@@ -103,17 +153,132 @@
 
 .data-table td:nth-child(2),
 .data-table td:nth-child(3) {
-    color: var(--color-muted);
+    color: var(--color-text-light);
 }
 
-@media (max-width: 640px) {
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+/* Charts Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.chart-container {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+}
+
+.chart-image-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+}
+
+.metric-card {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+}
+
+.metric-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+}
+
+.metric-card p {
+    color: var(--color-text-light);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Evaluation List */
+.evaluation-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-md) 0;
+}
+
+.evaluation-list li {
+    padding: var(--spacing-xs) 0;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding-left: var(--spacing-md);
+    position: relative;
+}
+
+.evaluation-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.evaluation-list li strong {
+    color: var(--color-text);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .model-page {
+        padding-top: 0;
+    }
+    
+    .page-hero {
+        padding: var(--spacing-md) 0;
+    }
+    
+    .model-architecture,
+    .dataset {
+        padding: var(--spacing-md) 0;
+    }
+    
     .data-table th,
     .data-table td {
-        padding: 0.85rem 1rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.85rem;
     }
-
-    .data-table caption {
-        padding: 1rem;
+    
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .charts-grid {
+        grid-template-columns: 1fr;
     }
 }
-

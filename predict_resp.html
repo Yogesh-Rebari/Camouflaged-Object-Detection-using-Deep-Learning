@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>YOLOv8 | Live Prediction (Placeholder)</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+</head>
+<body>
+    <!-- Global, fixed site header with responsive navigation -->
+    <header class="site-header" role="banner">
+        <div class="container header-content">
+            <!-- Project title / logo -->
+            <div class="logo">
+                <a href="/" aria-label="COD Home">
+                    <!-- Animated SVG COD logo with shimmering gradient -->
+                    <svg class="cod-logo" width="130" height="36" viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="false">
+                        <title>COD</title>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" x2="100%" y1="0%" y2="0%">
+                                <stop offset="0%" stop-color="#60A5FA" />
+                                <stop offset="50%" stop-color="#38BDF8" />
+                                <stop offset="100%" stop-color="#A78BFA" />
+                                <!-- animate the gradient to create a shimmer -->
+                                <animateTransform attributeName="gradientTransform" type="translate" from="-1 0" to="1 0" dur="3s" repeatCount="indefinite" />
+                            </linearGradient>
+                        </defs>
+
+                        <text class="cod-text" x="4" y="26" fill="url(#logoGrad)" font-family="Segoe UI, Roboto, Arial, sans-serif" font-weight="700" font-size="24">COD</text>
+                        <!-- subtle glossy overlay using a semi-transparent white for depth -->
+                        <text class="cod-gloss" x="4" y="26" fill="rgba(255,255,255,0.08)" font-family="Segoe UI, Roboto, Arial, sans-serif" font-weight="700" font-size="24">COD</text>
+                    </svg>
+                </a>
+            </div>
+            <!-- Primary navigation (collapses on mobile) -->
+            <nav class="nav" role="navigation" aria-label="Primary">
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="/">Project Home</a></li>
+                    <li><a href="/model_info">Model &amp; Data</a></li>
+                    <li><a href="/predict">Live Prediction</a></li>
+                    <li><a href="/performance">Performance</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page main content injected by child templates -->
+    <main role="main">
+        
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Live Prediction</h1>
+                <p>Upload an image to run YOLOv8 object detection. The server will return an annotated image with detections.</p>
+            </div>
+            <div class="hero-actions">
+                <a class="cta-button primary" href="/model_info">Explore Model Details</a>
+                <a class="cta-button accent" href="/performance">View Evaluation Metrics</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container upload-section">
+        <h2>Image Upload</h2>
+        
+            
+        
+
+        <form method="post" action="/predict" enctype="multipart/form-data">
+            <label for="image">Choose an image (jpg/png):</label>
+            <input type="file" id="image" name="image" accept="image/*" required />
+            <button type="submit" class="cta-button primary">Detect</button>
+        </form>
+
+        
+    </section>
+
+    </main>
+
+    <!-- Global footer with social links -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-content">
+            <p>&copy; 2025 YOLOv8 Deployment Team. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">in</a>
+                <a href="#" aria-label="Twitter">tw</a>
+                <a href="#" aria-label="YouTube">yt</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global scripts and page-specific scripts -->
+    <script src="/static/js/script.js"></script>
+    
+</body>
+</html>
+

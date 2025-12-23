@@ -1,97 +1,147 @@
-# YOLOv8 Flask Demo
+# Camouflaged Military Object Detection (YOLOv8)
 
-![cod01](static/images/cod01.png)
+Modern Flask-based web app for image upload and live webcam detection using a custom YOLOv8 model. Includes LandingLens-inspired UI, prioritized model loading (`best (1).pt`), and API endpoints for live detection.
 
-A simple Flask web app that integrates YOLOv8 (Ultralytics) for image object detection. Upload an image on the `/predict` page and the server will return an annotated image showing detected objects.
+![Architecture](static/images/system%20archihtecture.png)
 
----
+## Project Highlights
+- YOLOv8 custom model with prioritized load order (`models/best (1).pt` → fallback `yolov8n.pt`).
+- Live detection via `/api/live_detect` (base64 frames) with annotated frame return.
+- Upload workflow with extension/mimetype checks and 16 MB limit.
+- Clean structure with blueprints and service layer:
+  - `app/` (factory, routes, services)
+  - `templates/`, `static/`
+  - `models/` (place `best (1).pt`)
+- LandingLens-inspired frontend (minimal, light theme).
 
-## Demo Images
-
-Left: cod01 • Center: cod02 • Right: cod03
-
-![cod02](static/images/cod02.png)
-![cod03](static/images/cod03.png)
-
-A camo-style sample:
-
-![camo03](static/images/camo03.png)
-
----
-
-## Features
-- Upload images via a friendly web UI (`/predict`).
-- Server-side YOLOv8 inference (Ultralytics).
-- Annotated result returned and saved to `static/uploads/`.
-- Secure filename handling and upload size limit.
-- Docker-ready for easy deployment.
-
----
-
-## Quick start (local, venv)
-
-1. Create and activate a virtual environment (Windows PowerShell):
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+## Repository Structure
+```
+.
+├─ app/
+│  ├─ __init__.py          # app factory, config load, blueprints
+│  ├─ routes/
+│  │  ├─ web.py            # HTML routes (/ , /model_info, /performance, /predict)
+│  │  └─ api.py            # JSON API (/api/live_detect, /api/status)
+│  └─ services/
+│     └─ model_service.py  # YOLO load, inference, base64 decode
+├─ static/
+│  ├─ css/, js/, images/   # assets and provided diagrams/figures
+│  └─ uploads/             # runtime annotated outputs
+├─ templates/              # Jinja2 templates
+├─ models/                 # place best (1).pt here
+├─ app.py                  # entrypoint (uses create_app)
+├─ config.py               # Dev/Prod configs (env-driven)
+├─ requirements.txt
+└─ tests/ (suggested)      # add pytest-based API checks
 ```
 
-2. Install dependencies:
+## Quickstart (Local)
 
-```powershell
+**📖 For detailed step-by-step instructions, see [SETUP_GUIDE.md](SETUP_GUIDE.md)**
+
+Quick start:
+
+1) **Python env**
+```bash
+python -m venv venv
+venv\Scripts\activate   # on Windows
+# or: source venv/bin/activate
+```
+
+2) **Install dependencies**
+```bash
 pip install -r requirements.txt
+pip install ultralytics   # if not pinned in requirements.txt
 ```
 
-3. Place your YOLOv8 weights in `models/` (see `MODEL_SETUP_GUIDE.md`). Example: `models/best.pt`.
+3) **Add your model**
+- Place `best (1).pt` in `models/`.
 
-4. Run the app:
-
-```powershell
+4) **Run**
+```bash
 python app.py
+# Visit: http://127.0.0.1:5000/predict
 ```
 
-Open http://127.0.0.1:5000/predict and try uploading an image.
+**💡 New to the project?** Check out [SETUP_GUIDE.md](SETUP_GUIDE.md) for comprehensive setup instructions, troubleshooting, and VS Code/Copilot tips.
 
----
+## API
+- `POST /api/live_detect`
+  - Body (JSON): `{ "image": "data:image/jpeg;base64,...." }`
+  - Response: `{ success, detections, count, annotated_image }`
+- `GET /api/status`
+  - Returns `{ model_loaded: bool }`
 
-## Run with Docker (recommended for deployment/demo)
+## Security & Safety
+- `SECRET_KEY` and limits from env (`config.py`); defaults provided for dev.
+- Upload hardening: extension & mimetype checks; 16 MB cap.
+- Model caching avoids reload on each request.
 
-Build and run locally (CPU):
+## Model & Pipeline Visuals
 
-```powershell
-docker build -t yolo-flask-app:latest .
-docker run --rm -p 5000:5000 -v ${PWD}/static/uploads:/app/static/uploads yolo-flask-app:latest
-```
+Architecture (YOLOv8 Backbone/Neck/Head):
+![YOLOv8 Architecture](static/images/Image01.png)
 
-Place model weights in `models/` before building container, or bake them into the image.
+Dataset examples:
+![Dataset Samples](static/images/Image02.png)
+![More Samples](static/images/Image03.png)
+![Additional Samples](static/images/Image04.png)
 
----
+System flow:
+![System Flow](static/images/system%20archihtecture.png)
 
-## Deploying
-See `DEPLOY.md` for a quick guide covering Render, AWS EC2 (GPU), and Docker Hub.
+Confusion matrix:
+![Confusion Matrix](static/images/Comfusion%20matrix.png)
 
----
+Confidence curve:
+![Confidence Curve](static/images/Confidence%20curve.png)
 
-## Model setup
-See `MODEL_SETUP_GUIDE.md` for details on placing trained weights in `models/` and troubleshooting model loading errors.
+Precision-Recall curve:
+![Precision Recall Curve](static/images/precision%20recall%20curve.png)
 
----
+Precision-Confidence matrix:
+![Precision Confidence Matrix](static/images/presision%20confidence%20matrix.png)
 
-## Contribution
-- Open an issue to discuss features or report bugs.
-- Feel free to submit a PR — keep changes small and focused.
+## Testing (suggested)
+- Convert existing helper scripts into pytest tests:
+  - `/predict` upload success
+  - `/api/live_detect` JSON success with sample base64
+  - Error cases: missing file, bad mimetype, missing image field
 
----
+## Deployment
 
-## License
-Choose a license for your repo (MIT recommended for demos).
+**🚀 Ready for production!** See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment guides.
 
----
+### Quick Deploy Options:
 
-Thanks! If you'd like, I can:
-- Add a GitHub Actions workflow to build and push the Docker image.
-- Create a `docker-compose.yml` for local dev with volumes and environment variables.
-- Add example unit tests for the Flask app.
+1. **⭐ Render** (Recommended - Easiest)
+   - Free tier available
+   - Automatic HTTPS
+   - Git-based deployment
+   - See [DEPLOYMENT.md](DEPLOYMENT.md#1-render--recommended---easiest)
 
-Tell me which you'd like next and I'll implement it.
+2. **Railway** (Great Alternative)
+   - Simple setup
+   - $5 free credit/month
+   - See [DEPLOYMENT.md](DEPLOYMENT.md#2-railway--great-alternative)
+
+3. **AWS EC2** (For GPU/Full Control)
+   - Full server control
+   - GPU instances available
+   - See [DEPLOYMENT.md](DEPLOYMENT.md#3-aws-ec2-for-gpuhigh-performance)
+
+4. **Docker** (Universal)
+   - Works on any platform
+   - See [DEPLOYMENT.md](DEPLOYMENT.md#4-docker-deployment-universal)
+
+### Production Checklist:
+- ✅ `wsgi.py` created for production servers
+- ✅ `gunicorn` added to requirements.txt
+- ✅ Security headers configured
+- ✅ Error handling for production
+- ✅ Environment-based configuration
+- ✅ Logging configured
+
+**📖 Full deployment guide:** [DEPLOYMENT.md](DEPLOYMENT.md)
+
+

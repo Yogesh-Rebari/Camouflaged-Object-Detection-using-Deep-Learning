@@ -8,10 +8,19 @@
     <main class="model-page">
         <section class="page-hero">
             <div class="container">
-                <h1>Model Performance &amp; Evaluation Metrics</h1>
+                <h1>Performance &amp; Evaluation Metrics</h1>
                 <p>
                     Comprehensive performance metrics and evaluation results for the Camouflaged Military Soldier Detection model.
                 </p>
+            </div>
+        </section>
+
+        <!-- Performance Image Section -->
+        <section class="model-image-section">
+            <div class="container">
+                <div class="model-image-container">
+                    <img src="{{ url_for('static', filename='images/cod02.png') }}" alt="Performance Metrics Visualization">
+                </div>
             </div>
         </section>
 
@@ -23,44 +32,52 @@
                     The model was evaluated on a validation set after training for 100 epochs. The following metrics
                     demonstrate the model's effectiveness in detecting camouflaged military soldiers across various scenarios.
                 </p>
-                <div class="table-wrapper">
-                    <table class="data-table">
-                        <caption>Validation Set Performance Metrics</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">Metric</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Value Range</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>mAP@0.5</strong></td>
-                                <td>Mean Average Precision at IoU threshold 0.5</td>
-                                <td>Evaluated on validation set</td>
-                            </tr>
-                            <tr>
-                                <td><strong>mAP@0.5:0.95</strong></td>
-                                <td>Mean Average Precision across IoU thresholds 0.5 to 0.95</td>
-                                <td>Evaluated on validation set</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Precision</strong></td>
-                                <td>Ratio of true positive detections to all positive predictions</td>
-                                <td>Evaluated on validation set</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Recall</strong></td>
-                                <td>Ratio of true positive detections to all actual positives</td>
-                                <td>Evaluated on validation set</td>
-                            </tr>
-                            <tr>
-                                <td><strong>F1-Score</strong></td>
-                                <td>Harmonic mean of Precision and Recall</td>
-                                <td>Calculated from Precision and Recall</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3>mAP@0.5</h3>
+                        <p>Mean Average Precision at IoU threshold 0.5</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>mAP@0.5:0.95</h3>
+                        <p>Mean Average Precision across IoU thresholds 0.5 to 0.95</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Precision</h3>
+                        <p>Ratio of true positive detections to all positive predictions</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Recall</h3>
+                        <p>Ratio of true positive detections to all actual positives</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>F1-Score</h3>
+                        <p>Harmonic mean of Precision and Recall</p>
+                    </div>
+                </div>
+                
+                <!-- Performance Visualization Charts -->
+                <div class="charts-grid" style="margin-top: var(--spacing-md);">
+                    <div class="chart-container">
+                        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: var(--spacing-xs); color: var(--color-text);">Precision-Recall Curve</h3>
+                        <p style="color: var(--color-text-light); font-size: 0.85rem; margin-bottom: var(--spacing-sm);">Shows the trade-off between precision and recall across different classes. mAP@0.5: 0.596</p>
+                        <div class="chart-image-wrapper">
+                            <img src="{{ url_for('static', filename='images/precision recall curve.png') }}" alt="Precision-Recall Curve" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: var(--spacing-xs); color: var(--color-text);">F1-Confidence Curve</h3>
+                        <p style="color: var(--color-text-light); font-size: 0.85rem; margin-bottom: var(--spacing-sm);">F1 score vs confidence threshold. Optimal threshold: 0.324 with F1: 0.58</p>
+                        <div class="chart-image-wrapper">
+                            <img src="{{ url_for('static', filename='images/Confidence curve.png') }}" alt="F1-Confidence Curve" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: var(--spacing-xs); color: var(--color-text);">Precision-Confidence Curve</h3>
+                        <p style="color: var(--color-text-light); font-size: 0.85rem; margin-bottom: var(--spacing-sm);">Precision vs confidence threshold. Achieves 91% precision at 0.993 confidence</p>
+                        <div class="chart-image-wrapper">
+                            <img src="{{ url_for('static', filename='images/presision confidence matrix.png') }}" alt="Precision-Confidence Curve" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -171,23 +188,36 @@
                     The model performance was evaluated using standard object detection metrics on a held-out validation set.
                     The evaluation process includes:
                 </p>
-                <ul style="color: var(--color-text); line-height: 1.8; margin: 1.5rem 0;">
+                <ul class="evaluation-list">
                     <li><strong>Validation Set Testing:</strong> Model evaluated on separate validation images not seen during training</li>
                     <li><strong>Confusion Matrix Analysis:</strong> Normalized confusion matrix generated to understand classification performance</li>
                     <li><strong>Learning Curve Analysis:</strong> Training and validation losses monitored to ensure proper convergence</li>
                     <li><strong>Best Model Selection:</strong> Model checkpoint with best validation performance selected for deployment</li>
                     <li><strong>Visual Validation:</strong> Sample validation images with predictions visualized for qualitative assessment</li>
                 </ul>
+                
+                <!-- Confusion Matrix Visualization -->
+                <div style="margin-top: var(--spacing-md);">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: var(--spacing-xs); color: var(--color-text);">Confusion Matrix</h3>
+                    <p style="color: var(--color-text-light); font-size: 0.9rem; margin-bottom: var(--spacing-md); max-width: 75ch;">
+                        The confusion matrix shows the classification performance across all 13 classes. Diagonal values represent correct predictions, 
+                        while off-diagonal values indicate misclassifications. High diagonal values for classes like military_tank (1592), 
+                        camouflage_soldier (427), and soldier (533) demonstrate strong detection capabilities.
+                    </p>
+                    <div class="model-image-container" style="max-width: 1000px;">
+                        <img src="{{ url_for('static', filename='images/Comfusion matrix.png') }}" alt="Confusion Matrix" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
             </div>
-        </section>
+            </div>
+        </div>
+    </section>
 
         <!-- Call to Action -->
-        <section class="container" style="margin: 3rem 0; text-align: center;">
+        <section class="container" style="margin: var(--spacing-md) 0; text-align: center;">
             <div class="hero-actions">
                 <a class="cta-button primary" href="{{ url_for('predict') }}">Test Model Now</a>
                 <a class="cta-button secondary" href="{{ url_for('model_info') }}">View Model Details</a>
-            </div>
-        </section>
+        </div>
+    </section>
     </main>
 {% endblock %}
 

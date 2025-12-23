@@ -7,19 +7,18 @@
         <section class="hero" id="about-project">
             <div class="container hero-content">
                 <div class="hero-text">
-                    <h1>Camouflaged Object Detection using Deep Learning.</h1>
+                    <h1>Camouflaged Object Detection using Deep Learning</h1>
                     <p>
-                        This project presents a robust deployment of YOLOv8 tailored for detecting camouflaged or low-contrast objects in complex backgrounds.
-                        It demonstrates a scalable inference pipeline designed for both web and edge, with a focus on clarity, speed, and reliability.
+                        Advanced YOLOv8-powered AI system for detecting camouflaged military personnel in complex environments. 
+                        Real-time inference with precision and speed.
                     </p>
-                    <p>
-                        Our objective is to deliver precise detections in challenging environments through thoughtful dataset preparation, model choice, and iterative evaluation.
-                    </p>
+                    <div class="hero-actions">
+                        <a class="cta-button primary" href="{{ url_for('predict') }}">Try Detection</a>
+                        <a class="cta-button secondary" href="{{ url_for('model_info') }}">Learn More</a>
+                    </div>
                 </div>
-                <div class="hero-actions">
-                    <a class="cta-button primary" href="{{ url_for('model_info') }}">Explore Model Details</a>
-                    <a class="cta-button secondary" href="{{ url_for('predict') }}">Run Detection Now</a>
-                    <a class="cta-button accent" href="{{ url_for('performance') }}">View Evaluation Metrics</a>
+                <div class="hero-image">
+                    <img src="{{ url_for('static', filename='images/cod03.png') }}" alt="Camouflaged Object Detection Demo">
                 </div>
             </div>
         </section>
@@ -35,7 +34,7 @@
                     <article class="team-card">
                         <img src="{{ url_for('static', filename='images/Osama.png') }}" alt="Portrait of Osama Mikrani" class="avatar-photo">
                         <h3>Osama Mikrani</h3>
-                        <p class="role">Full Stack Developer</p>
+                        <p class="role">USN:1CG22CS079</p>
                         <p class="bio">
                             Develops deployment tooling, streamlines the inference service, and enhances the UI for insight-driven workflows.
                         </p>
@@ -43,7 +42,7 @@
                     <article class="team-card">
                         <img src="{{ url_for('static', filename='images/Pavan.png') }}" alt="Portrait of Pavan U" class="avatar-photo">
                         <h3>Pavan U</h3>
-                        <p class="role">Computer Vision Engineer</p>
+                        <p class="role">USN:1CG22CS083</p>
                         <p class="bio">
                             Designs augmentation strategies, conducts ablation studies, and contributes to data-engineering improvements for model reliability.
                         </p>
@@ -51,7 +50,7 @@
                     <article class="team-card">
                         <img src="{{ url_for('static', filename='images/Raghu.png') }}" alt="Portrait of Raghu G.R" class="avatar-photo">
                         <h3>Raghu G R</h3>
-                        <p class="role">Data Scientist</p>
+                        <p class="role">USN:1CG22CS090</p>
                         <p class="bio">
                             Leads dataset analysis, labeling quality checks, and model evaluation with clear, actionable metrics.
                         </p>
@@ -59,7 +58,7 @@
                     <article class="team-card">
                         <img src="{{ url_for('static', filename='images/Yogesh.png') }}" alt="Portrait of Yogesh Rebari" class="avatar-photo">
                         <h3>Yogesh Rebari</h3>
-                        <p class="role">Software Engineer</p>
+                        <p class="role">USN:1CG22CS126</p>
                         <p class="bio">
                             Develops deployment tooling, streamlines the inference service, and enhances the UI for insight-driven workflows.
                         </p>
@@ -86,8 +85,8 @@
                     </article>
                     <article class="team-card">
                         <img src="{{ url_for('static', filename='images/Rashmi.png') }}" alt="Portrait of Mrs. Rashmi C R" width="128" height="128" class="avatar-photo">
-                        <h3>Mrs. Rashmi C R</h3>
-                        <p class="role">Professor, Dept. of CSE</p>
+                        <h3>Dr. Rashmi C R</h3>
+                        <p class="role">Associate Professor, Dept. of CSE</p>
                         <p class="bio">
                             Advised on experiment design, baseline comparisons, and interpretation of evaluation metrics.
                         </p>
@@ -105,8 +104,8 @@
                     <ul>
                         <li><strong>Email:</strong> <a href="mailto:codteam@gmail.com">codyolov8@gmail.com</a></li>
                         <li><strong>Phone:</strong> <a href="tel:+911234567890">+91 12345-67890</a></li>
-                        <li><strong>GitHub:</strong> <a href="https://github.com/example" target="_blank" rel="noopener">github.com</a></li>
-                        <li><strong>Location:</strong> CIT College Tumkur </li>
+                        <li><strong>GitHub:</strong> <a href="https://github.com/Yogesh-Rebari/Camouflaged-Object-Detection-using-Deep-Learning" target="_blank" rel="noopener">View Repository</a></li>
+                        <li><strong>Location:</strong> CIT College Tumkur</li>
                     </ul>
                 </div>
 

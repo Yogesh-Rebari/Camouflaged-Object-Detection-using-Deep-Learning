@@ -9,10 +9,19 @@
     <main class="model-page">
         <section class="page-hero">
             <div class="container">
-                <h1>Model Architecture &amp; Dataset Documentation</h1>
+                <h1>Model Architecture &amp; Dataset</h1>
                 <p>
-                    A comprehensive overview of the YOLOv8 model fine-tuned for Camouflaged Military Soldier Density Estimation.
+                    Comprehensive overview of our YOLOv8 model fine-tuned for Camouflaged Military Soldier Density Estimation.
                 </p>
+            </div>
+        </section>
+
+        <!-- Model Image Section -->
+        <section class="model-image-section">
+            <div class="container">
+                <div class="model-image-container">
+                    <img src="{{ url_for('static', filename='images/system archihtecture.png') }}" alt="System Architecture Visualization">
+                </div>
             </div>
         </section>
 
@@ -28,6 +37,20 @@
                     dataset of camouflaged military personnel, making it highly effective for detecting soldiers in
                     challenging visual environments.
                 </p>
+                
+                <!-- Architecture Diagram -->
+                <div style="margin: var(--spacing-xl) 0;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: var(--spacing-md); color: var(--color-text);">YOLOv8 Architecture Flow</h3>
+                    <p style="color: var(--color-text-light); font-size: 1.05rem; margin-bottom: var(--spacing-lg); max-width: 75ch;">
+                        The YOLOv8 architecture consists of five main stages: Input processing, Backbone feature extraction, 
+                        Neck feature fusion, Prediction heads, and Output generation. The diagram below illustrates the complete 
+                        data flow from input image to detected objects.
+                    </p>
+                    <div class="model-image-container" style="max-width: 1200px;">
+                        <img src="{{ url_for('static', filename='images/Image01.png') }}" alt="YOLOv8 Architecture Diagram" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
+                    </div>
+                </div>
+                
                 <div class="table-wrapper">
                     <table class="data-table">
                         <caption>YOLOv8 Configuration Overview</caption>
@@ -111,6 +134,20 @@
                     sets, with comprehensive annotations for bounding box localization. The dataset preparation follows YOLOv8
                     format standards with proper YAML configuration for class definitions and data paths.
                 </p>
+                
+                <!-- Dataset Sample Images -->
+                <div style="margin: var(--spacing-xl) 0;">
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: var(--spacing-md); color: var(--color-text);">Dataset Sample Images</h3>
+                    <p style="color: var(--color-text-light); font-size: 1.05rem; margin-bottom: var(--spacing-lg); max-width: 75ch;">
+                        The dataset contains diverse images across 13 classes including camouflaged soldiers, military vehicles, 
+                        weapons, and various military equipment. Each image is carefully annotated with bounding boxes for 
+                        precise object localization.
+                    </p>
+                    <div class="model-image-container" style="max-width: 1200px;">
+                        <img src="{{ url_for('static', filename='images/Image02.png') }}" alt="Dataset Sample Images" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
+                    </div>
+                </div>
+                
                 <div class="table-wrapper">
                     <table class="data-table">
                         <caption>Dataset Summary Statistics</caption>

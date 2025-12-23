@@ -21,23 +21,7 @@
             <!-- Project title / logo -->
             <div class="logo">
                 <a href="{{ url_for('index') }}" aria-label="COD Home">
-                    <!-- Animated SVG COD logo with shimmering gradient -->
-                    <svg class="cod-logo" width="130" height="36" viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="false">
-                        <title>COD</title>
-                        <defs>
-                            <linearGradient id="logoGrad" x1="0%" x2="100%" y1="0%" y2="0%">
-                                <stop offset="0%" stop-color="#60A5FA" />
-                                <stop offset="50%" stop-color="#38BDF8" />
-                                <stop offset="100%" stop-color="#A78BFA" />
-                                <!-- animate the gradient to create a shimmer -->
-                                <animateTransform attributeName="gradientTransform" type="translate" from="-1 0" to="1 0" dur="3s" repeatCount="indefinite" />
-                            </linearGradient>
-                        </defs>
-
-                        <text class="cod-text" x="4" y="26" fill="url(#logoGrad)" font-family="Segoe UI, Roboto, Arial, sans-serif" font-weight="700" font-size="24">COD</text>
-                        <!-- subtle glossy overlay using a semi-transparent white for depth -->
-                        <text class="cod-gloss" x="4" y="26" fill="rgba(255,255,255,0.08)" font-family="Segoe UI, Roboto, Arial, sans-serif" font-weight="700" font-size="24">COD</text>
-                    </svg>
+                    <span class="cod-logo">COD</span>
                 </a>
             </div>
             <!-- Primary navigation (collapses on mobile) -->
