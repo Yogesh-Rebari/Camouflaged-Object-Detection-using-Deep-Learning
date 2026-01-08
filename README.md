@@ -63,8 +63,6 @@ python app.py
 # Visit: http://127.0.0.1:5000/predict
 ```
 
-**💡 New to the project?** Check out [SETUP_GUIDE.md](SETUP_GUIDE.md) for comprehensive setup instructions, troubleshooting, and VS Code/Copilot tips.
-
 ## API
 - `POST /api/live_detect`
   - Body (JSON): `{ "image": "data:image/jpeg;base64,...." }`
@@ -108,31 +106,6 @@ Precision-Confidence matrix:
   - `/api/live_detect` JSON success with sample base64
   - Error cases: missing file, bad mimetype, missing image field
 
-## Deployment
-
-**🚀 Ready for production!** See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment guides.
-
-### Quick Deploy Options:
-
-1. **⭐ Render** (Recommended - Easiest)
-   - Free tier available
-   - Automatic HTTPS
-   - Git-based deployment
-   - See [DEPLOYMENT.md](DEPLOYMENT.md#1-render--recommended---easiest)
-
-2. **Railway** (Great Alternative)
-   - Simple setup
-   - $5 free credit/month
-   - See [DEPLOYMENT.md](DEPLOYMENT.md#2-railway--great-alternative)
-
-3. **AWS EC2** (For GPU/Full Control)
-   - Full server control
-   - GPU instances available
-   - See [DEPLOYMENT.md](DEPLOYMENT.md#3-aws-ec2-for-gpuhigh-performance)
-
-4. **Docker** (Universal)
-   - Works on any platform
-   - See [DEPLOYMENT.md](DEPLOYMENT.md#4-docker-deployment-universal)
 
 ### Production Checklist:
 - ✅ `wsgi.py` created for production servers
