@@ -21,20 +21,35 @@ SKIP_IMAGE_IMPORTS = (
 
 
 def _import_yolo() -> None:
-    global YOLO, YOLO_AVAILABLE
+    global YOLO, YOLO_AVAILABLE, _last_error
     if SKIP_YOLO_IMPORT:
-        print("⚠ SKIP_YOLO_IMPORT is set — skipping YOLO import.")
+        print("[WARN] SKIP_YOLO_IMPORT is set - skipping YOLO import.")
         return
     try:
+        # Patch torch.load for PyTorch 2.6+ compatibility
+        import torch
+        # Patch torch.load to set weights_only=False by default for YOLO models
+        original_torch_load = torch.load
+        def patched_torch_load(*args, **kwargs):
+            # Only patch if weights_only is not explicitly set
+            if 'weights_only' not in kwargs:
+                kwargs['weights_only'] = False
+            return original_torch_load(*args, **kwargs)
+        torch.load = patched_torch_load
+        print("[OK] Patched torch.load for PyTorch 2.6+ compatibility (weights_only=False)")
+
         from ultralytics import YOLO as _YOLO
 
         YOLO = _YOLO
         YOLO_AVAILABLE = True
         if not callable(YOLO):
-            print("⚠ YOLO class not callable")
+            print("[WARN] YOLO class not callable")
             YOLO_AVAILABLE = False
     except Exception as e:
-        print(f"❌ YOLO import failed: {e}")
+        _last_error = f"YOLO import failed: {e}"
+        print(f"[ERROR] {_last_error}")
+        import traceback
+        print(f"   Traceback: {traceback.format_exc()}")
         YOLO = None
         YOLO_AVAILABLE = False
 
@@ -42,7 +57,7 @@ def _import_yolo() -> None:
 def _import_image_libs() -> None:
     global Image, cv2, np
     if SKIP_IMAGE_IMPORTS:
-        print("⚠ SKIP_IMAGE_IMPORTS is set — skipping Pillow/OpenCV/numpy.")
+        print("[WARN] SKIP_IMAGE_IMPORTS is set - skipping Pillow/OpenCV/numpy.")
         return
     try:
         from PIL import Image as _Image
@@ -66,6 +81,7 @@ _import_image_libs()
 
 # Model cache
 _model_cache: Optional[Any] = None
+_last_error: Optional[str] = None
 
 
 def _discover_model_paths(models_dir: Path) -> List[Path]:
@@ -97,8 +113,10 @@ def _discover_model_paths(models_dir: Path) -> List[Path]:
 def load_model() -> Optional[Any]:
     """Load YOLO model with caching."""
     global _model_cache
+    global _last_error
     if not YOLO_AVAILABLE or YOLO is None:
-        print("❌ Cannot load model: YOLO not available")
+        _last_error = "Cannot load model: YOLO not available"
+        print(f"[ERROR] {_last_error}")
         return None
     if _model_cache is not None:
         return _model_cache
@@ -109,14 +127,19 @@ def load_model() -> Optional[Any]:
     print(f"Discovered models: {discovered}")
 
     for path in discovered:
-        if path.is_absolute() and path.exists():
+        # Resolve path to absolute before checking
+        resolved_path = path.resolve() if not path.is_absolute() else path
+        if resolved_path.exists():
             try:
-                print(f"Attempting to load model from: {path}")
-                _model_cache = YOLO(str(path))
-                print(f"✓ Model loaded: {path}")
+                print(f"Attempting to load model from: {resolved_path}")
+                _model_cache = YOLO(str(resolved_path))
+                print(f"[OK] Model loaded: {resolved_path}")
                 return _model_cache
             except Exception as e:
-                print(f"❌ Error loading model from {path}: {e}")
+                _last_error = f"Error loading model from {resolved_path}: {e}"
+                print(f"[ERROR] {_last_error}")
+                import traceback
+                print(f"   Traceback: {traceback.format_exc()}")
                 _model_cache = None
                 continue
 
@@ -126,7 +149,8 @@ def load_model() -> Optional[Any]:
         _model_cache = YOLO("yolov8n.pt")
         return _model_cache
     except Exception as e:
-        print(f"❌ Error loading default model: {e}")
+        _last_error = f"Error loading default model: {e}"
+        print(f"[ERROR] {_last_error}")
         _model_cache = None
         return None
 
@@ -180,18 +204,31 @@ def run_inference_on_path(model: Any, path: str, conf: float = 0.25) -> Tuple[Li
 
 def decode_base64_image(image_b64: str) -> Optional[Any]:
     """Decode data URL base64 image to numpy array (BGR)."""
-    if not image_b64.startswith("data:image"):
+    if not image_b64 or not image_b64.startswith("data:image"):
+        print("[WARN] Invalid base64 image format - must start with 'data:image'")
         return None
     try:
         header, encoded = image_b64.split(",", 1)
         data = base64.b64decode(encoded)
         if np is None or cv2 is None:
+            print("[ERROR] Image processing libraries (numpy/cv2) not available for base64 decode.")
             return None
         image_array = np.frombuffer(data, dtype=np.uint8)
         img = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+        if img is None:
+            print("[ERROR] Failed to decode image from base64 data")
+            return None
+        print(f"[OK] Successfully decoded base64 image: shape={img.shape}")
         return img
     except Exception as e:
-        print(f"Base64 decode error: {e}")
+        print(f"[ERROR] Base64 decode error: {e}")
+        import traceback
+        print(f"   Traceback: {traceback.format_exc()}")
         return None
+
+
+def get_last_model_error() -> Optional[str]:
+    """Return the last model/import error message, if any."""
+    return _last_error
 
 

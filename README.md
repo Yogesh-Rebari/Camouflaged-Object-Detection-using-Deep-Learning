@@ -117,4 +117,45 @@ Precision-Confidence matrix:
 
 **📖 Full deployment guide:** [DEPLOYMENT.md](DEPLOYMENT.md)
 
+## Team & Contributions
+
+Below are the core contributors to this project along with their primary roles and a short list of contributions. The images displayed are for visual reference.
+
+<p align="center">
+  <img src="static/images/Osama.png" alt="Osama Mikrani" width="160" style="margin:8px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.12);">
+  <img src="static/images/Raghu.png" alt="Raghu G R" width="160" style="margin:8px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.12);">
+  <img src="static/images/Yogesh.png" alt="Yogesh Rebari" width="160" style="margin:8px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.12);">
+</p>
+
+### Osama Mikrani — Lead Backend & Deployment Engineer
+- Role: Backend engineer and deployment lead
+- Contributions:
+  - Implemented the Flask application factory and blueprint structure
+  - Built the model service (loading, caching, inference helpers)
+  - Added production entrypoints (`wsgi.py`, `Procfile`) and deployment guidance
+  - Wrote the model discovery and fallback logic
+
+### Pavan U — Data & Augmentation Engineer
+- Role: Dataset engineer and augmentation specialist
+- Contributions:
+  - Curated and preprocessed the training/validation datasets
+  - Designed augmentation pipelines and data formatting for YOLOv8
+  - Assisted with label quality checks and dataset splits for robust evaluation
+
+### Raghu G R — Model Architect & Evaluation Lead
+- Role: Model architecture and evaluation
+- Contributions:
+  - Selected and tuned the YOLOv8 variant for this task
+  - Performed model fine-tuning, hyperparameter selection, and evaluation
+  - Produced the performance artifacts (confusion matrices, PR curves) shown in the repo
+
+### Yogesh Rebari — Frontend & Integration Engineer
+- Role: Frontend developer and integration lead
+- Contributions:
+  - Implemented the UI templates, upload flow, and the live-detection client
+  - Integrated the frontend with the inference API and improved UX for results
+  - Wrote documentation and setup guides for local and cloud deployment
+
+If you want me to include short links to each contributor's GitHub profile or a short contact line, tell me which handles to add and I will update the README accordingly.
+
 
