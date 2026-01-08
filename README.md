@@ -85,9 +85,6 @@ Dataset examples:
 ![More Samples](static/images/Image03.png)
 ![Additional Samples](static/images/Image04.png)
 
-System flow:
-![System Flow](static/images/system%20archihtecture.png)
-
 Confusion matrix:
 ![Confusion Matrix](static/images/Comfusion%20matrix.png)
 
@@ -100,30 +97,14 @@ Precision-Recall curve:
 Precision-Confidence matrix:
 ![Precision Confidence Matrix](static/images/presision%20confidence%20matrix.png)
 
-## Testing (suggested)
-- Convert existing helper scripts into pytest tests:
-  - `/predict` upload success
-  - `/api/live_detect` JSON success with sample base64
-  - Error cases: missing file, bad mimetype, missing image field
-
-
-### Production Checklist:
-- ✅ `wsgi.py` created for production servers
-- ✅ `gunicorn` added to requirements.txt
-- ✅ Security headers configured
-- ✅ Error handling for production
-- ✅ Environment-based configuration
-- ✅ Logging configured
-
-**📖 Full deployment guide:** [DEPLOYMENT.md](DEPLOYMENT.md)
-
 ## Team & Contributions
 
-Below are the core contributors to this project along with their primary roles and a short list of contributions. The images displayed are for visual reference.
+Below are the core contributors to this project along with their primary roles and a short list of contributions.
 
 <p align="center">
   <img src="static/images/Osama.png" alt="Osama Mikrani" width="160" style="margin:8px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.12);">
   <img src="static/images/Raghu.png" alt="Raghu G R" width="160" style="margin:8px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.12);">
+  <img src="static/images/Pavan.png" alt="Pavan U" width="160" style="margin:8px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.12);">
   <img src="static/images/Yogesh.png" alt="Yogesh Rebari" width="160" style="margin:8px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.12);">
 </p>
 
@@ -156,6 +137,5 @@ Below are the core contributors to this project along with their primary roles a
   - Integrated the frontend with the inference API and improved UX for results
   - Wrote documentation and setup guides for local and cloud deployment
 
-If you want me to include short links to each contributor's GitHub profile or a short contact line, tell me which handles to add and I will update the README accordingly.
 
 
