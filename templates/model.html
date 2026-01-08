@@ -20,7 +20,7 @@
         <section class="model-image-section">
             <div class="container">
                 <div class="model-image-container">
-                    <img src="{{ url_for('static', filename='images/system archihtecture.png') }}" alt="System Architecture Visualization">
+                    <img src="{{ url_for('static', filename='images/system archihtecture.png') }}" alt="System Architecture Visualization" style="max-width:600px; width:100%; height:auto;">
                 </div>
             </div>
         </section>
@@ -46,9 +46,9 @@
                         Neck feature fusion, Prediction heads, and Output generation. The diagram below illustrates the complete 
                         data flow from input image to detected objects.
                     </p>
-                    <div class="model-image-container" style="max-width: 1200px;">
-                        <img src="{{ url_for('static', filename='images/Image01.png') }}" alt="YOLOv8 Architecture Diagram" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
-                    </div>
+                    <div class="model-image-container" style="max-width: 1200px; text-align:center;">
+                            <img src="{{ url_for('static', filename='images/Image01.png') }}" alt="YOLOv8 Architecture Diagram" style="max-width:900px; width:100%; height:auto; display:inline-block; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
+                        </div>
                 </div>
                 
                 <div class="table-wrapper">
@@ -87,7 +87,7 @@
                             </tr>
                             <tr>
                                 <td>Training Epochs</td>
-                                <td>100 epochs</td>
+                                <td>50 epochs</td>
                             </tr>
                             <tr>
                                 <td>Batch Size</td>

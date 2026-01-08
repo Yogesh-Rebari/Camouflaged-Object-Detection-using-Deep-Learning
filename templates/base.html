@@ -20,7 +20,7 @@
         <div class="container header-content">
             <!-- Project title / logo -->
             <div class="logo">
-                <a href="{{ url_for('index') }}" aria-label="COD Home">
+                <a href="{{ url_for('web.index') }}" aria-label="COD Home">
                     <span class="cod-logo">COD</span>
                 </a>
             </div>
@@ -32,10 +32,10 @@
                     <span></span>
                 </button>
                 <ul class="nav-links">
-                    <li><a href="{{ url_for('index') }}">Project Home</a></li>
-                    <li><a href="{{ url_for('model_info') }}">Model &amp; Data</a></li>
-                    <li><a href="{{ url_for('predict') }}">Live Prediction</a></li>
-                    <li><a href="{{ url_for('performance') }}">Performance</a></li>
+                    <li><a href="{{ url_for('web.index') }}">Project Home</a></li>
+                    <li><a href="{{ url_for('web.model_info') }}">Model &amp; Data</a></li>
+                    <li><a href="{{ url_for('web.predict') }}">Live Prediction</a></li>
+                    <li><a href="{{ url_for('web.performance') }}">Performance</a></li>
                 </ul>
             </nav>
         </div>

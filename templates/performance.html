@@ -19,7 +19,7 @@
         <section class="model-image-section">
             <div class="container">
                 <div class="model-image-container">
-                    <img src="{{ url_for('static', filename='images/cod02.png') }}" alt="Performance Metrics Visualization">
+                    <img src="{{ url_for('static', filename='images/output03.png') }}" alt="Performance Metrics Visualization">
                 </div>
             </div>
         </section>
@@ -205,7 +205,7 @@
                         camouflage_soldier (427), and soldier (533) demonstrate strong detection capabilities.
                     </p>
                     <div class="model-image-container" style="max-width: 1000px;">
-                        <img src="{{ url_for('static', filename='images/Comfusion matrix.png') }}" alt="Confusion Matrix" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
+                        <img src="{{ url_for('static', filename='images/Comfusion matrix.png') }}" alt="Confusion Matrix" style="max-width:800px; width:100%; height:auto; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);">
             </div>
             </div>
         </div>
@@ -214,8 +214,8 @@
         <!-- Call to Action -->
         <section class="container" style="margin: var(--spacing-md) 0; text-align: center;">
             <div class="hero-actions">
-                <a class="cta-button primary" href="{{ url_for('predict') }}">Test Model Now</a>
-                <a class="cta-button secondary" href="{{ url_for('model_info') }}">View Model Details</a>
+                <a class="cta-button primary" href="{{ url_for('web.predict') }}">Test Model Now</a>
+                <a class="cta-button secondary" href="{{ url_for('web.model_info') }}">View Model Details</a>
         </div>
     </section>
     </main>

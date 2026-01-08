@@ -468,7 +468,7 @@
             {% endif %}
         {% endwith %}
 
-                    <form method="post" action="{{ url_for('predict') }}" enctype="multipart/form-data" class="upload-form" id="uploadForm">
+                    <form method="post" action="{{ url_for('web.predict') }}" enctype="multipart/form-data" class="upload-form" id="uploadForm">
                         <div class="file-input-wrapper" id="fileWrapper">
                             <input type="file" id="image" name="image" accept="image/jpeg,image/jpg,image/png,image/webp" required />
                             <label for="image" class="file-input-label" id="fileLabel">
